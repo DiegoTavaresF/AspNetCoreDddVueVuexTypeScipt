@@ -23,5 +23,5 @@ This is a project that i did to study Vue and Vuex.
 ## How to use:
 - First, you will need .Net CORE SDK 2.1 
 - Run migrations
--- Update-Database -Project "Ddd.Infra.CrossCutting.Identity" -Context ApplicationDbContext 
--- Update-Database -Project "Ddd.Infra.Data" -Context ContextBase
+- Update-Database -Project "Ddd.Infra.CrossCutting.Identity" -Context ApplicationDbContext 
+- Update-Database -Project "Ddd.Infra.Data" -Context ContextBase
