@@ -16,12 +16,12 @@ This is a project that i did to study Vue and Vuex.
 - AutoMapper
 - FluentValidator
 
-## Technologies:
+## Architecture:
 - DDD (Domain Driven Design) 
 
 
 ## How to use:
-1 - First, you will need .Net CORE SDK 2.1 
-2 - Run migrations
-2.1 - Update-Database -Project "Ddd.Infra.CrossCutting.Identity" -Context ApplicationDbContext 
-2.2 - Update-Database -Project "Ddd.Infra.Data" -Context ContextBase
+- First, you will need .Net CORE SDK 2.1 
+- Run migrations
+-- Update-Database -Project "Ddd.Infra.CrossCutting.Identity" -Context ApplicationDbContext 
+-- Update-Database -Project "Ddd.Infra.Data" -Context ContextBase
