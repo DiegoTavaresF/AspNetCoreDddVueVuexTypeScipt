@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="7.5.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\03 - Domain\Ddd_Domain\Ddd.Domain.csproj" />
+    <ProjectReference Include="..\..\04 - Infra\04.2 - Infra.Data\Infra.Data\Ddd.Infra.Data.csproj" />
+  </ItemGroup>
+
+</Project>

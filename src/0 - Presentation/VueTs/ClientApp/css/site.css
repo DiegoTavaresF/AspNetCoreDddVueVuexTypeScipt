@@ -1,0 +1,38 @@
+body{
+   background-color:whitesmoke;
+   min-height:600px;
+}
+
+.conteudo {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+footer.footer {
+    background-color: transparent;
+}
+
+label{
+    text-align:left !important;
+}
+
+.navbar-guest {
+    border-top: 6px solid #4c3dc4;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.padding-top-bottom-20 {
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+
+.botao-acao-grid {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.paginacao {
+    margin-bottom: 10px;
+}
+

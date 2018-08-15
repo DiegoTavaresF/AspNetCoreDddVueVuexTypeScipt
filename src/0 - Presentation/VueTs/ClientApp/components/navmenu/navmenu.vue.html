@@ -1,0 +1,35 @@
+<template>
+    <nav role="navigation" aria-label="main navigation" class="navbar navbar-guest">
+        <div class="container">
+            <div class="navbar-brand">
+                <a href="/" class="navbar-item">
+                    <strong> VUE TypeScript </strong>
+                </a>
+                <button data-target="navMenu" class="button navbar-burger"><span></span> <span></span> <span></span></button>
+            </div>
+            <div id="navMenu" class="navbar-menu">
+                <div class="navbar-start">
+
+                    <a class="navbar-item">
+                        <router-link to="/produto">
+                            Produtos
+                        </router-link>
+                    </a>
+
+                </div>
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <a>
+                            <router-link to="/logout">
+                                Logout
+                            </router-link>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    </div>
+</template>
+
+<style src="./navmenu.css" />

@@ -1,0 +1,119 @@
+<template>
+    <div>
+
+        <nav class="breadcrumb is-small" aria-label="breadcrumbs">
+            <ul>
+                <li> <router-link to="/">Início</router-link></li>
+                <li class="is-active"><a href="#" aria-current="page">Produto</a></li>
+            </ul>
+        </nav>
+
+        <nav class="panel">
+            <div class="panel-block">
+                <div class="container padding-top-bottom-20">
+                    <div v-if="alertMessage.length > 0">
+                        <div class="notification is-success">
+                            <button class="delete" @click="alertMessage = []"></button>
+                            {{alertMessage[1]}}
+                        </div>
+                        <br />
+                    </div>
+                    <div class="columns">
+                        <div class="column is-5">
+                            <div class="field is-grouped">
+                                <p class="control is-expanded">
+                                    <input class="input" type="text" placeholder="nome" v-model="filtro">
+                                </p>
+                                <p class="control">
+                                    <a class="button is-info" @click="atualizarGrid()">
+                                        Pesquisar
+                                    </a>
+                                </p>
+                            </div>
+                            <div class="field">
+                                <a class="pull-right" @click="abrirFecharPesquisaAvancada()">
+                                    Pesquisa avançada
+                                </a>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <p class="pull-right">
+                                <router-link to="/produto/novo" class="button is-success pull-right" tag="button">Novo</router-link>
+                            </p>
+                        </div>
+                    </div>
+
+                    <br />
+                    <paginacao :paginaAtual="paginaAtual"
+                               :itensPorPagina="itensPorPagina"
+                               :totalDeItens="getTotalDeItensEncontrados"
+                               @setItensPorPagina="setItensPorPagina"
+                               @setPaginaAtual="setPaginaAtual" />
+
+                    <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nome</th>
+                                <th>Preço de venda</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="produto in this.state.Produtos">
+                                <td>{{produto.id}}</td>
+                                <td>{{produto.nome}}</td>
+                                <td>{{produto.precoDeVenda}}</td>
+                                <td>
+                                    <p>
+                                        <router-link to="/produto/editar" class="botao-acao-grid"><i class="far fa-edit"></i></router-link>
+                                        <a class="botao-acao-grid" @click="alterarRegistroASerExcluido(produto.id, produto.nome)"><i class="far fa-trash-alt"></i></a>
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </nav>
+
+        <modal-excluir titulo='Excluir produto'
+                      :id='idItemExcluir'
+                      :descricao="descricaoItemExcluir"
+                      @alterarRegistroASerExcluido="alterarRegistroASerExcluido"
+                      @excluir="excluir"/>
+
+        <div class="modal is-active" v-if="exibirPesquisaAvancada">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Pesquisa avançada</p>
+                    <button class="delete" aria-label="close" @click="abrirFecharPesquisaAvancada()"></button>
+                </header>
+                <section class="modal-card-body">
+                    <div class="content">
+                        <div class="field">
+                            <label class="label pull-left">Name</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Nome" v-model="filtro">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label pull-left">Preço</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Preço">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <footer class="modal-card-foot buttons is-right">
+                    <button class="button pull-left" @click="abrirFecharPesquisaAvancada()">Cancelar</button>
+                    <button class="button is-info pull-right" @click="atualizarGrid()">Pesquisar</button>
+                </footer>
+            </div>
+        </div>
+    </div>
+</template>
+
+<style src="./index.css" />
+<script src="./index.ts"></script>

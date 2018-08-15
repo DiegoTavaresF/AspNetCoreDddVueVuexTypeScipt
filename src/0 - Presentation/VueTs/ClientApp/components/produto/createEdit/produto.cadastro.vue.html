@@ -1,0 +1,47 @@
+<template>
+    <div @keydown.enter="salvar()">
+        <nav class="breadcrumb is-small" aria-label="breadcrumbs">
+            <ul>
+                <li> <router-link to="/">Início</router-link></li>
+                <li> <router-link to="/produto">Produto</router-link></li>
+                <li class="is-active"><a href="#" aria-current="page">Novo</a></li>
+            </ul>
+        </nav>
+
+        <nav class="panel">
+            <div class="panel-block">
+                <div class="container padding-top-bottom-20">
+                    <div v-if="alertMessage.length > 0">
+                        <div class="notification is-primary">
+                            <button class="delete" @click="alertMessage = []"></button>
+                            {{alertMessage[1]}}
+                        </div>
+                        <br />
+                    </div>
+                    <div class="columns">
+                        <div class="column is-6">
+                            <div class="field">
+                                <label class="label">Name</label>
+                                <div class="control">
+                                    <input class="input" type="text" placeholder="Nome" v-model="produtoDto.Nome">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Preço de venda</label>
+                                <div class="control">
+                                    <input class="input" type="number" placeholder="0,00" v-model="produtoDto.PrecoDeVenda">
+                                </div>
+                            </div>
+                            <div class="padding-top-bottom-20">
+                                <a class="button is-success pull-right" @click="salvar()">Salvar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</template>
+
+<style src="./produto.cadastro.css" />
+<script src="./produto.cadastro.ts"></script>

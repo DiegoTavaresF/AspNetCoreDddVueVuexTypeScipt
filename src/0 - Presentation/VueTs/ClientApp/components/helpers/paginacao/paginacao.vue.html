@@ -1,0 +1,26 @@
+<template>
+    <div class="paginacao">
+        <nav >
+            <div class="columns">
+                <div class="column">
+                    <ul class="pagination-list">
+                        Registros por página
+                        <li v-for="iten in arrayRegistrosPorPagina">
+                            <a class="pagination-link" v-bind:class="{'is-current': iten == itensPorPagina}"  aria-current="page" @click="setItensPorPagina(iten)">{{iten}}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <ul class="pagination-list pull-right">
+                        Página
+                        <li v-for="iten in getNumeroDePaginas()">
+                            <a class="pagination-link" v-bind:class="{'is-current': iten == paginaAtual}"  @click="setPaginaAtual(iten)">{{iten}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</template>
+
+<script src="./paginacao.ts"></script>

@@ -1,0 +1,25 @@
+<template>
+    <div>
+        <div class="modal is-active" v-if="id>0">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">{{titulo}}</p>
+                    <button class="delete" aria-label="close" @click="fecharModalExcluir()"></button>
+                </header>
+                <section class="modal-card-body">
+                    <div class="content">
+
+                        Deseja realmente excluir "<strong>{{descricao}}</strong>"?
+                    </div>
+                </section>
+                <footer class="modal-card-foot buttons is-right">
+                    <button class="button pull-left" @click="fecharModalExcluir()">Cancelar</button>
+                    <button class="button is-info pull-right" @click="excluir()">Excluir</button>
+                </footer>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script src="./modalExcluir.ts"></script>
