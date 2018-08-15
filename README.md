@@ -1,8 +1,10 @@
 ## What is this project?
 This is a project that i did to study Vue and Vuex. 
 - CRUD example using VUE and VUEX with TypeScript.
+- Pagination component and GridDeleteModalComponent
 - Autentication page using Asp.Net MVC Core and Asp.Net Identity.
 - DDD 
+
 
 
 ## Technologies:
@@ -25,3 +27,6 @@ This is a project that i did to study Vue and Vuex.
 - Run migrations
 - Update-Database -Project "Ddd.Infra.CrossCutting.Identity" -Context ApplicationDbContext 
 - Update-Database -Project "Ddd.Infra.Data" -Context ContextBase
+
+## Contact:
+[Diego Tavares Ferreira](https://www.linkedin.com/in/diego-tavares-ferreira/)
