@@ -5,8 +5,6 @@ This is a project that i did to study Vue and Vuex.
 - Autentication page using Asp.Net MVC Core and Asp.Net Identity.
 - DDD 
 
-
-
 ## Technologies:
 - Vue
 - Vuex
@@ -21,12 +19,11 @@ This is a project that i did to study Vue and Vuex.
 ## Architecture:
 - DDD (Domain Driven Design) 
 
-
 ## How to use:
-- First, you will need .Net CORE SDK 2.1 
-- Run migrations
-- Update-Database -Project "Ddd.Infra.CrossCutting.Identity" -Context ApplicationDbContext 
-- Update-Database -Project "Ddd.Infra.Data" -Context ContextBase
+- You will need .Net CORE SDK 2.1, NodeJs and Visual studio 2017
+- With pront command, open the directory "src\0 - Presentation\VueTs" and run "npm install" 
+- Run migration 1 (identity) "Update-Database -Project "Ddd.Infra.CrossCutting.Identity" -Context ApplicationDbContext" 
+- Run migration 2 "Update-Database -Project "Ddd.Infra.Data" -Context ContextBase"
 
 ## Contact:
 [Diego Tavares Ferreira](https://www.linkedin.com/in/diego-tavares-ferreira/)
