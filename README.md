@@ -1,5 +1,7 @@
 ## What is this project?
 CRUD example using VUE and VUEX with TypeScript, authentication using asp.net core identity and DDD architecture.
+- vue pagination component
+- vue modal delete component
 
 ## Technologies:
 - Vue
