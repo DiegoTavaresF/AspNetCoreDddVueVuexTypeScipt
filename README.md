@@ -1,9 +1,5 @@
 ## What is this project?
-This is a project that i did to study Vue and Vuex. 
-- CRUD example using VUE and VUEX with TypeScript.
-- Pagination component and GridDeleteModalComponent
-- Autentication page using Asp.Net MVC Core and Asp.Net Identity.
-- DDD 
+CRUD example using VUE and VUEX with TypeScript, authentication using asp.net core identity and DDD architecture.
 
 ## Technologies:
 - Vue
