@@ -17,7 +17,6 @@ export default class ProdutoCadastroComponent extends Vue {
     salvar() {
         var response = this.actionCadastrar(this.produtoDto)
             .then((responseData: any) => {
-                debugger;
                 if (responseData[0] == '400') {
                     this.alertMessage = ['400',"Erro"];
                 }

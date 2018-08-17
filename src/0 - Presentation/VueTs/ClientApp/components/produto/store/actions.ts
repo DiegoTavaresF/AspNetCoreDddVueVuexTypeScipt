@@ -27,7 +27,6 @@ const actionExcluir = async function (context: any, id: number): Promise<string[
 
     await axios.delete('./api/produto/excluir', { params: { 'id': id } })
         .then((response) => {
-            debugger;
             if (response.data.erro != '' && response.data.erro != null) {
                 result = ['400', "Erro"];
             }

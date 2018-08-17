@@ -1,9 +1,13 @@
 ## What is this project?
 CRUD example using VUE and VUEX with TypeScript, authentication using asp.net core identity and DDD architecture.
 
+
 ![](vuex.gif)
 
 ![](paginacao.gif)
+
+![](cadastro_pesquisa.gif)
+
 
 ## Technologies:
 - Vue
