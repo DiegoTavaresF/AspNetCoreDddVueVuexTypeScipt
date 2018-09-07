@@ -11,9 +11,9 @@ const routes = [
     { path: '/', component: require('./components/home/home.vue.html') },
     { path: '/modalExcluir', component: require('./components/helpers/modalExcluir/modalExcluir.vue.html') },
     { path: '/paginacao', component: require('./components/helpers/paginacao/paginacao.vue.html') },
-    { path: '/produto', component: require('./components/produto/index/index.vue.html') },
-    { path: '/produto/novo', component: require('./components/produto/createEdit/produto.cadastro.vue.html') },
-    { path: '/produto/editar:id', name:'editarProduto', component: require('./components/produto/createEdit/produto.cadastro.vue.html') },
+    { path: '/tarefa', component: require('./components/tarefa/index/index.vue.html') },
+    { path: '/tarefa/novo', component: require('./components/tarefa/createEdit/tarefa.cadastro.vue.html') },
+    { path: '/tarefa/editar:id', name:'editarTarefa', component: require('./components/tarefa/createEdit/tarefa.cadastro.vue.html') },
 ];
 
 new Vue({

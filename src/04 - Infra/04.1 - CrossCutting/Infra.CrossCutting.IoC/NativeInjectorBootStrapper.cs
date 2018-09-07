@@ -1,6 +1,6 @@
-﻿using Ddd.Application.Services.Produtos;
-using Ddd.Application.Services.Produtos.Dtos;
-using Ddd.Application.Services.Produtos.Validator;
+﻿using Ddd.Application.Services.Tarefas;
+using Ddd.Application.Services.Tarefas.Dtos;
+using Ddd.Application.Services.Tarefas.Validator;
 using Ddd.Domain.Entities.Usuarios;
 using Ddd.Infra.CrossCutting.Identity.Authorization;
 using Ddd.Infra.CrossCutting.Identity.Models;
@@ -25,9 +25,9 @@ namespace Ddd.Infra.CrossCutting.IoC
 
             // Application
 
-            services.AddScoped<IProdutoAppService, ProdutoAppService>();
+            services.AddScoped<ITarefaAppService, TarefaAppService>();
 
-            services.AddTransient<IValidator<ProdutoFormDto>, ProdutoFormDtoValidator>();
+            services.AddTransient<IValidator<TarefaFormDto>, TarefaFormDtoValidator>();
 
             // Infra - Data
             services.AddScoped<IContextBase, ContextBase>();

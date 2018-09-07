@@ -36,3 +36,13 @@ label{
     margin-bottom: 10px;
 }
 
+
+.panel-heading{
+    background-color: white !important;
+    font-weight: bold;
+}
+
+
+textarea{
+    min-height: 100px;
+}

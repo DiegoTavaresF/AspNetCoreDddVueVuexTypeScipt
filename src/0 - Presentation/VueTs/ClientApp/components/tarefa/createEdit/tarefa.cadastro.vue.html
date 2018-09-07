@@ -1,0 +1,53 @@
+<template>
+    <div>
+        <nav class="breadcrumb is-small" aria-label="breadcrumbs">
+            <ul>
+                <li> <router-link to="/">Início</router-link></li>
+                <li> <router-link to="/tarefa">Tarefa</router-link></li>
+                <li class="is-active"><a href="#" aria-current="page">Novo</a></li>
+            </ul>
+        </nav>
+
+        <nav class="panel" >
+            <div class="panel-block">
+                <div class="container padding-top-bottom-20">
+                    <div v-if="alertMessage.length > 0">
+                        <div class="notification is-primary">
+                            <button class="delete" @click="alertMessage = []"></button>
+                            {{alertMessage[1]}}
+                        </div>
+                        <br />
+                    </div>
+                    <div class="columns">
+                        <div class="column is-6">
+                            <div class="field">
+                                <label class="label">Título</label>
+                                <div class="control">
+                                    <input class="input" type="text" placeholder="Título" v-model="tarefaDto.Titulo">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Descrição</label>
+                                <div class="control">
+                                    <textarea class="input" v-model="tarefaDto.Descricao" ></textarea>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label pull-left">Concluído</label>
+                                <div class="control">
+                                    <input type="checkbox">
+                                </div>
+                            </div>
+                            <div class="padding-top-bottom-20">
+                                <a class="button is-success pull-right" @click="salvar()">Salvar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</template>
+
+<style src="./tarefa.cadastro.css" />
+<script src="./tarefa.cadastro.ts"></script>

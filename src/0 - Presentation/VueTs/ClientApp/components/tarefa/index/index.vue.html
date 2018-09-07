@@ -1,0 +1,129 @@
+<template>
+    <div>
+
+        <nav class="breadcrumb is-small" aria-label="breadcrumbs">
+            <ul>
+                <li> <router-link to="/">Início</router-link></li>
+                <li class="is-active"><a href="#" aria-current="page">Tarefa</a></li>
+            </ul>
+        </nav>
+
+        <nav class="panel">
+            <p class="panel-heading">
+                Tarefas
+            </p>
+            <div class="panel-block">
+                <div class="container padding-top-bottom-20">
+                    <div v-if="alertMessage.length > 0">
+                        <div class="notification is-success">
+                            <button class="delete" @click="alertMessage = []"></button>
+                            {{alertMessage[1]}}
+                        </div>
+                        <br />
+                    </div>
+                   
+                    <div class="columns">
+                        <div class="column is-5">
+                            <div class="field is-grouped">
+                                <p class="control is-expanded">
+                                    <input class="input" type="text" placeholder="nome" v-model="filtro">
+                                </p>
+                                <p class="control">
+                                    <a class="button is-info" @click="atualizarGrid()">
+                                        Pesquisar
+                                    </a>
+                                </p>
+                            </div>
+                            <div class="field">
+                                <a class="pull-right" @click="abrirFecharPesquisaAvancada()">
+                                    Pesquisa avançada
+                                </a>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <p class="pull-right">
+                                <router-link to="/tarefa/novo" class="button is-success pull-right" tag="button">Novo</router-link>
+                            </p>
+                        </div>
+                    </div>
+
+                    <br />
+                    <paginacao :paginaAtual="paginaAtual"
+                               :itensPorPagina="itensPorPagina"
+                               :totalDeItens="getTotalDeItensEncontrados"
+                               @setItensPorPagina="setItensPorPagina"
+                               @setPaginaAtual="setPaginaAtual" />
+
+                    <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+                        <thead>
+                            <tr>
+                                <th>Título</th>
+                                <th>Status</th>
+                                <th>Data de cadastro</th>
+                                <th>Data da última alteração</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="tarefa in this.state.Tarefas">
+                                <td>{{tarefa.titulo}}</td>
+
+                                <td v-if="tarefa.excluido">Excluído</td>
+                                <td v-else-if="tarefa.concluido">Concluída</td>
+                                <td v-else>Em andamento</td>
+
+                                <td>{{tarefa.dataDeCadastro}}</td>
+                                <td>{{tarefa.dataDaUltimaAlteracao}}</td>
+                                <td>
+                                    <p v-if="!tarefa.excluido">
+                                        <router-link to="/tarefa/editar" class="botao-acao-grid"><i class="far fa-edit"></i></router-link>
+                                        <a class="botao-acao-grid" @click="alterarRegistroASerExcluido(tarefa.id, tarefa.nome)"><i class="far fa-trash-alt"></i></a>
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </nav>
+
+        <modal-excluir titulo='Excluir tarefa'
+                      :id='idItemExcluir'
+                      :descricao="descricaoItemExcluir"
+                      @alterarRegistroASerExcluido="alterarRegistroASerExcluido"
+                      @excluir="excluir"/>
+
+        <div class="modal is-active" v-if="exibirPesquisaAvancada">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Pesquisa avançada</p>
+                    <button class="delete" aria-label="close" @click="abrirFecharPesquisaAvancada()"></button>
+                </header>
+                <section class="modal-card-body">
+                    <div class="content">
+                        <div class="field">
+                            <label class="label pull-left">Titulo</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Título" v-model="filtroAvancado.Titulo">
+                            </div>
+                        </div>
+                        <div class="field">
+                                <label class="label pull-left" >Exibir tarefas excluídas</label>
+                                <div class="control">
+                                    <input type="checkbox" v-model="filtroAvancado.ExibirExcluidos">
+                                </div>
+                            </div>
+                    </div>
+                </section>
+                <footer class="modal-card-foot buttons is-right">
+                    <button class="button pull-left" @click="abrirFecharPesquisaAvancada()">Cancelar</button>
+                    <button class="button is-info pull-right" @click="atualizarGrid(true)">Pesquisar</button>
+                </footer>
+            </div>
+        </div>
+    </div>
+</template>
+
+<style src="./index.css" />
+<script src="./index.ts"></script>

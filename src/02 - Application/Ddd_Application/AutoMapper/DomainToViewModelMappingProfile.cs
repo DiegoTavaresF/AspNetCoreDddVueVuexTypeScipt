@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Ddd.Application.Services.Produtos.Dtos;
-using Ddd.Domain.Entities.Produtos;
+using Ddd.Application.Services.Tarefas.Dtos;
+using Ddd.Domain.Entities.Tarefas;
 
 namespace Ddd.Application.AutoMapper
 {
@@ -8,7 +8,7 @@ namespace Ddd.Application.AutoMapper
     {
         public DomainToViewModelMappingProfile()
         {
-            CreateMap<Produto, ProdutoFormDto>();
+            CreateMap<Tarefa, TarefaFormDto>();
         }
     }
 }

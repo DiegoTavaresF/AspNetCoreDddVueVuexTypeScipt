@@ -4,6 +4,6 @@
     {
         public string Descricao { get; set; }
         public string Erro { get; set; }
-        public int Id { get; set; }
+        public long Id { get; set; }
     }
 }

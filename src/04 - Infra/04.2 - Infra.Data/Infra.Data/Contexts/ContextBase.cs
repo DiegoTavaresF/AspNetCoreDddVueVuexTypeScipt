@@ -1,4 +1,4 @@
-﻿using Ddd.Domain.Entities.Produtos;
+﻿using Ddd.Domain.Entities.Tarefas;
 using Ddd.Domain.Entities.Usuarios;
 using Ddd.Infra.Data.EntityConfig;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +10,7 @@ namespace Ddd.Infra.Data.Contexts
 {
     public class ContextBase : DbContext, IContextBase
     {
-        public DbSet<Produto> Produtos { get; set; }
+        public DbSet<Tarefa> Tarefas { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -27,7 +27,7 @@ namespace Ddd.Infra.Data.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            new ProdutoConfig().DefinirConfiguracoesDaEntidade(modelBuilder);
+            new TarefaConfig().DefinirConfiguracoesDaEntidade(modelBuilder);
             new UsuarioConfig().DefinirConfiguracoesDaEntidade(modelBuilder);
 
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
@@ -35,7 +35,7 @@ namespace Ddd.Infra.Data.Contexts
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
 
-            modelBuilder.Entity<Produto>().HasQueryFilter(p => !p.Excluido);
+            //modelBuilder.Entity<Tarefa>().HasQueryFilter(p => !p.Excluido);
 
             base.OnModelCreating(modelBuilder);
         }
