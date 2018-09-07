@@ -13,7 +13,7 @@ const routes = [
     { path: '/paginacao', component: require('./components/helpers/paginacao/paginacao.vue.html') },
     { path: '/tarefa', component: require('./components/tarefa/index/index.vue.html') },
     { path: '/tarefa/novo', component: require('./components/tarefa/createEdit/tarefa.cadastro.vue.html') },
-    { path: '/tarefa/editar:id', name:'editarTarefa', component: require('./components/tarefa/createEdit/tarefa.cadastro.vue.html') },
+    { path: '/tarefa/editar/:id',  component: require('./components/tarefa/createEdit/tarefa.cadastro.vue.html') },
 ];
 
 new Vue({

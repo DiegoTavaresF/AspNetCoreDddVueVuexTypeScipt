@@ -8,20 +8,46 @@ import { TarefaState, Tarefa } from '../store/state';
 export default class TarefaCadastroComponent extends Vue {
     @State('moduleTarefas') state: TarefaState;
     @Action('actionCadastrar') actionCadastrar: any;
-    @Getter('getTotalDeItensEncontrados') getTotalDeItensEncontrados: any;
+    @Action('actionEditar') actionEditar: any;
+    @Action('actionCarregar') actionCarregar: any;
+    @Getter('getTarefaEmEdicao') getTarefaEmEdicao: any;
 
     
-    tarefaDto: Tarefa = {} as Tarefa;
+    tarefaDto: Tarefa = new Tarefa();
     alertMessage: string[] = [];
 
+    mounted() {
+        
+        let id = this.$route.params.id;
+        if(id){
+            this.actionCarregar(id)
+                .then(() => {
+                    this.tarefaDto = this.state.TarefaEmEdicao;
+                } );
+        }
+    }
+
     salvar() {
-        var response = this.actionCadastrar(this.tarefaDto)
+         this.actionCadastrar(this.tarefaDto)
             .then((responseData: any) => {
                 if (responseData[0] == '400') {
                     this.alertMessage = ['400',"Erro"];
                 }
                 else {
-                    this.$router.push('./');
+                    this.$router.push('/tarefa');
+                }
+            });
+    }
+
+    editar() {
+         this.actionEditar(this.tarefaDto)
+            .then((responseData: any) => {
+                debugger;
+                if (responseData[0] == '400') {
+                    this.alertMessage = ['400',"Erro"];
+                }
+                else {
+                    this.$router.push('/tarefa');
                 }
             });
     }

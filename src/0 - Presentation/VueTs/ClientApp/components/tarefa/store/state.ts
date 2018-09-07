@@ -1,21 +1,32 @@
-export const state: TarefaState = {
-    Tarefas: [],
-    TotalDeItensEncontrados: 0,
-    AlertMessage: []
-};
+export class TarefaState  {
 
-export interface TarefaState  {
-    Tarefas: Array<Tarefa>;
+    constructor(){
+        this.TarefaEmEdicao = new Tarefa();
+        this.Tarefas = [];
+        this.TotalDeItensEncontrados = 0;
+        this.AlertMessage = [];
+    }
+
+    Tarefas: Tarefa[];
+    TarefaEmEdicao: Tarefa;
     TotalDeItensEncontrados: number;
     AlertMessage: string[];
 
 }
 
-export interface Tarefa {
-    Id: number;
-    Descricao: string;
-    Titulo: string;
-    Concluido: boolean,
+export class Tarefa {
+    constructor(){
+        this.id = 0,
+        this.descricao = "",
+        this.titulo = "",
+        this.concluido = false
+    }
+
+    id: number;
+    descricao: string;
+    titulo: string;
+    concluido: boolean;
 }
 
+export const state: TarefaState = new TarefaState();
   

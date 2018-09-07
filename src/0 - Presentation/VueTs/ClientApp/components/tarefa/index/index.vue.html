@@ -76,7 +76,7 @@
                                 <td>{{tarefa.dataDaUltimaAlteracao}}</td>
                                 <td>
                                     <p v-if="!tarefa.excluido">
-                                        <router-link to="/tarefa/editar" class="botao-acao-grid"><i class="far fa-edit"></i></router-link>
+                                        <router-link :to="'/tarefa/editar/' + tarefa.id"  class="botao-acao-grid"><i class="far fa-edit"></i></router-link>
                                         <a class="botao-acao-grid" @click="alterarRegistroASerExcluido(tarefa.id, tarefa.nome)"><i class="far fa-trash-alt"></i></a>
                                     </p>
                                 </td>

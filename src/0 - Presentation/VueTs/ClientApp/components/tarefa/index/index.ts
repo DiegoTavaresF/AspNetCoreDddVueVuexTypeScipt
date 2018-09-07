@@ -48,7 +48,6 @@ export default class TarefaIndexComponent extends Vue {
 
     atualizarGrid(pesquisaAvancada:boolean = false) {
         this.exibirPesquisaAvancada = false;
-        debugger;
         let parametros = { paginaAtual: this.paginaAtual, itensPorPagina: this.itensPorPagina, filtro: this.filtro, filtroAvancado:this.filtroAvancado, utilizarPesquisaAvancada:pesquisaAvancada };
         this.actionCarregarGrid(parametros);
     }

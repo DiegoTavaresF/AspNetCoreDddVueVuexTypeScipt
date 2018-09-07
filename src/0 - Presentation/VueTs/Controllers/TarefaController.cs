@@ -24,7 +24,7 @@ namespace VueTs.Controllers
         }
 
         [HttpGet("[action]")]
-        public TarefaFormDto CarregarForm(int id)
+        public TarefaFormDto CarregarForm(long id)
         {
             var dto = _tarefaAppService.CarregarForm(id);
 
@@ -40,7 +40,7 @@ namespace VueTs.Controllers
             return gridDto;
         }
 
-        [HttpPost("[action]")]
+        [HttpPut("[action]")]
         public TarefaFormDto Editar([FromBody] TarefaFormDto tarefaFormDto)
         {
             var result = _tarefaAppService.Editar(tarefaFormDto);

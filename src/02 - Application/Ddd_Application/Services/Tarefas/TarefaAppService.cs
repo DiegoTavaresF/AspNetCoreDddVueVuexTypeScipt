@@ -60,11 +60,12 @@ namespace Ddd.Application.Services.Tarefas
         {
             return _context.Tarefas
                            .Where(w => w.Id == id)
-                           .Select(p => new TarefaFormDto
+                           .Select(t => new TarefaFormDto
                            {
-                               Id = p.Id,
-                               Titulo = p.Titulo,
-                               Descricao = p.Descricao
+                               Id = t.Id,
+                               Titulo = t.Titulo,
+                               Descricao = t.Descricao,
+                               Concluido = t.Concluido
                            })
                            .FirstOrDefault();
         }
@@ -86,10 +87,14 @@ namespace Ddd.Application.Services.Tarefas
                     query = query.Where(t => EF.Functions.Like(t.Titulo, $"%{filtro}%"));
                 }
             }
-            else if (!string.IsNullOrWhiteSpace(filtro))
+            else
             {
                 query = query.Where(t => !t.Excluido);
-                query = query.Where(t => EF.Functions.Like(t.Titulo, $"%{filtro}%"));
+
+                if (!string.IsNullOrWhiteSpace(filtro))
+                {
+                    query = query.Where(t => EF.Functions.Like(t.Titulo, $"%{filtro}%"));
+                }
             }
 
             gridDto.TotalDeItensEncontrados = query.Count();
@@ -134,6 +139,7 @@ namespace Ddd.Application.Services.Tarefas
             tarefa.SetConcluido(formDto.Concluido);
             tarefa.SetDescricao(formDto.Descricao);
             tarefa.SetTitulo(formDto.Titulo);
+            tarefa.AtualizarDataDaUltimaAlteracao();
 
             if (!tarefa.IsValid())
             {
@@ -160,8 +166,7 @@ namespace Ddd.Application.Services.Tarefas
                 };
             }
 
-            tarefa.Excluido = true;
-            tarefa.DataDaUltimaAlteracao = DateTime.Now;
+            tarefa.SetExcluido();
 
             _context.Attach(tarefa);
             _context.Entry(tarefa).Property(x => x.Excluido).IsModified = true;

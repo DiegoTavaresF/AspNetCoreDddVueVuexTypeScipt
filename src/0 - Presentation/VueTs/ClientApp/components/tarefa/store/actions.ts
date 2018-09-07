@@ -22,6 +22,28 @@ const actionCadastrar = async function (context: any, values: any): Promise<stri
     return result;
 };
 
+
+const actionEditar = async function (context: any, values: any): Promise<string[]> {
+    let result: string[] = [];
+
+    await axios.put('./api/tarefa/editar', values)
+        .then((response) => {
+            if (response.data.validationErros.length > 0) {
+                result = ['400', "Erro"];
+            }
+            else {
+                result = ['200', 'Cadastrado com sucesso'];
+            }
+
+            context.commit('setAlertMessage', result);
+        })
+        .catch(function (error) {
+            return ['500', error];
+        });
+
+    return result;
+};
+
 const actionExcluir = async function (context: any, id: number): Promise<string[]> {
     let result: string[] = [];
 
@@ -43,11 +65,25 @@ const actionExcluir = async function (context: any, id: number): Promise<string[
     return result;
 };
 
+const actionCarregar = async function(context: any, id: number): Promise<boolean> {
+   
+    let url = './api/tarefa/CarregarForm?id=' + id;
+    await axios.get(url)
+                .then(response => {
+                    context.commit('carregarParaEditar', response.data);
+                    return true;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+
+    return false;
+};
+
 export const actions: any = {
 
     actionCarregarGrid: (context: any, values: any) => {
         let url = './api/tarefa/CarregarGrid?';
-        debugger;
         const params = new URLSearchParams({
             paginaAtual: values.paginaAtual,
             itensPorPagina: values.itensPorPagina,
@@ -59,7 +95,6 @@ export const actions: any = {
             params.append( "filtroAvancado.Titulo", values.filtroAvancado.Titulo);
             params.append( "filtroAvancado.ExibirExcluidos", values.filtroAvancado.ExibirExcluidos);
         }
-        
 
         axios.get(url + params.toString())
             .then(response => {
@@ -68,10 +103,11 @@ export const actions: any = {
             .catch(error => {
                 console.log(error)
             })
-
     },
 
     actionCadastrar,
+    actionCarregar,
+    actionEditar,
 
     actionSetAlertMessage: (context: any, message: string[]) => {
         context.commit('setAlertMessage', message);
