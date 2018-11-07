@@ -23,7 +23,7 @@ namespace Ddd_Application_Tests.Services
         }
 
         [Fact]
-        public void Test_in_memory_database_1()
+        public void Cadastrar_com_todas_informacoes()
         {
             var options = new DbContextOptionsBuilder<ContextBase>()
                .UseInMemoryDatabase(databaseName: "Test_in_memory_database_1")
@@ -60,7 +60,37 @@ namespace Ddd_Application_Tests.Services
             }
         }
 
-        private List<Tarefa> CriarListaTarefas()
+        [Fact]
+        public void CarregarForm()
+        {
+            var options = new DbContextOptionsBuilder<ContextBase>()
+               .UseInMemoryDatabase(databaseName: "Test_in_memory_database_1")
+               .Options;
+
+            var tarefa = new Tarefa("aaa", "bbb");
+
+            // Run the test against one instance of the context
+            using (var context = new ContextBase(options))
+            {
+                var unitOfWork = new UnitOfWork(context);
+
+                context.Add(tarefa);
+                unitOfWork.Commit();
+            }
+
+            // Use a separate instance of the context to verify correct data was saved to database
+            using (var context = new ContextBase(options))
+            {
+                var tarefaRepository = new TarefaRepository(context);
+                var tarefaAppService = new TarefaAppService(tarefaRepository, mapper, new TarefaFormDtoValidator());
+                var tarefaFormDto = tarefaAppService.CarregarForm(tarefa.Id);
+
+                Assert.Equal(tarefa.Titulo, tarefaFormDto.Titulo);
+                Assert.Equal(tarefa.Descricao, tarefaFormDto.Descricao);
+            }
+        }
+
+        private List<Tarefa> CarregarTarefas()
         {
             return new List<Tarefa>
             {
