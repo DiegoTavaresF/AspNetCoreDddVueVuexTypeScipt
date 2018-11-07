@@ -25,15 +25,7 @@ namespace Ddd.Infra.Data.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Concluido");
-
                     b.Property<DateTime?>("DataDaUltimaAlteracao");
-
-                    b.Property<DateTime>("DataDeCadastro");
-
-                    b.Property<DateTime?>("DataDeConclusao");
-
-                    b.Property<DateTime?>("DataDeExclusao");
 
                     b.Property<string>("Descricao")
                         .HasMaxLength(200);

@@ -10,11 +10,29 @@ namespace Ddd.Infra.Data.Contexts
 {
     public class ContextBase : DbContext, IContextBase
     {
+        private readonly bool _isTest = false;
+
+        public ContextBase()
+        {
+        }
+
+        public ContextBase(DbContextOptions<ContextBase> options)
+       : base(options)
+        {
+            _isTest = true;
+        }
+
         public DbSet<Tarefa> Tarefas { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            if (_isTest)
+            {
+                base.OnConfiguring(optionsBuilder);
+                return;
+            }
+
             // get the configuration from the app settings
             var config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())

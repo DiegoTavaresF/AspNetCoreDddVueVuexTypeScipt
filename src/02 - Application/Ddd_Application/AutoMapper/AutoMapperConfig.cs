@@ -6,11 +6,15 @@ namespace Ddd.Application.AutoMapper
     {
         public static MapperConfiguration RegisterMappings()
         {
-            return new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile(new DomainToViewModelMappingProfile());
-                cfg.AddProfile(new ViewModelToDomainMappingProfile());
-            });
+            var configuration = new MapperConfiguration(cfg =>
+           {
+               cfg.AddProfile(new DomainToViewModelMappingProfile());
+               cfg.AddProfile(new ViewModelToDomainMappingProfile());
+           });
+
+            configuration.AssertConfigurationIsValid();
+
+            return configuration;
         }
     }
 }

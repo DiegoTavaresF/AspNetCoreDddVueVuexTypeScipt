@@ -2,7 +2,7 @@
 using Ddd.Application.Base.Dto;
 using Ddd.Application.Services.Tarefas.Dtos;
 using Ddd.Domain.Entities.Tarefas;
-using Ddd.Infra.Data.Contexts;
+using Ddd.Domain.Repositories;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,13 +12,13 @@ namespace Ddd.Application.Services.Tarefas
 {
     public class TarefaAppService : ITarefaAppService
     {
-        private readonly IContextBase _context;
         private readonly IMapper _mapper;
         private readonly IValidator<TarefaFormDto> _tarefaFormDtoValidator;
+        private readonly ITarefaRepository _tarefaRepository;
 
-        public TarefaAppService(IContextBase context, IMapper mapper, IValidator<TarefaFormDto> tarefaFormDtoValidator)
+        public TarefaAppService(ITarefaRepository tarefaRepository, IMapper mapper, IValidator<TarefaFormDto> tarefaFormDtoValidator)
         {
-            _context = context;
+            _tarefaRepository = tarefaRepository;
             _mapper = mapper;
             _tarefaFormDtoValidator = tarefaFormDtoValidator;
         }
@@ -50,22 +50,20 @@ namespace Ddd.Application.Services.Tarefas
                 return formDto;
             }
 
-            _context.Tarefas.Add(tarefa);
-            _context.SaveChanges();
+            _tarefaRepository.Add(tarefa);
 
-            return _mapper.Map<TarefaFormDto>(_context.Tarefas.Find(tarefa.Id));
+            return _mapper.Map<TarefaFormDto>(tarefa);
         }
 
         public TarefaFormDto CarregarForm(long id)
         {
-            return _context.Tarefas
+            return _tarefaRepository.GetAll()
                            .Where(w => w.Id == id)
                            .Select(t => new TarefaFormDto
                            {
                                Id = t.Id,
                                Titulo = t.Titulo,
                                Descricao = t.Descricao,
-                               Concluido = t.Concluido
                            })
                            .FirstOrDefault();
         }
@@ -76,7 +74,7 @@ namespace Ddd.Application.Services.Tarefas
 
             if (numeroDaPagina < 1) numeroDaPagina = 1;
 
-            var query = _context.Tarefas
+            var query = _tarefaRepository.GetAll()
                                 .OrderBy(p => p.Titulo)
                                 .AsQueryable();
 
@@ -84,7 +82,7 @@ namespace Ddd.Application.Services.Tarefas
             {
                 if (!string.IsNullOrWhiteSpace(filtroAvancado.Titulo))
                 {
-                    query = query.Where(t => EF.Functions.Like(t.Titulo, $"%{filtro}%"));
+                    query = query.Where(t => EF.Functions.Like(t.Titulo, $"%{filtroAvancado.Titulo}%"));
                 }
             }
             else
@@ -104,10 +102,8 @@ namespace Ddd.Application.Services.Tarefas
                                     Id = t.Id,
                                     Titulo = t.Titulo,
                                     Descricao = t.Descricao,
-                                    Concluido = t.Concluido,
                                     DataDaUltimaAlteracao = t.DataDaUltimaAlteracao == null ? "" : ((DateTime)t.DataDaUltimaAlteracao).ToString("MM/dd/yyyy HH:mm"),
                                     DataDeCadastro = t.DataDeCadastro.ToString("MM/dd/yyyy HH:mm"),
-                                    DataDeConclusao = t.DataDeConclusao == null ? "" : ((DateTime)t.DataDeConclusao).ToString("MM/dd/yyyy HH:mm"),
                                     Excluido = t.Excluido
                                 })
                                 .Skip((numeroDaPagina - 1) * registrosPorPagina)
@@ -115,6 +111,11 @@ namespace Ddd.Application.Services.Tarefas
                                 .ToList();
 
             return gridDto;
+        }
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
         }
 
         public TarefaFormDto Editar(TarefaFormDto formDto)
@@ -135,8 +136,7 @@ namespace Ddd.Application.Services.Tarefas
                 return formDto;
             }
 
-            var tarefa = _context.Tarefas.Find(formDto.Id);
-            tarefa.SetConcluido(formDto.Concluido);
+            var tarefa = _tarefaRepository.GetById(formDto.Id);
             tarefa.SetDescricao(formDto.Descricao);
             tarefa.SetTitulo(formDto.Titulo);
             tarefa.AtualizarDataDaUltimaAlteracao();
@@ -147,33 +147,27 @@ namespace Ddd.Application.Services.Tarefas
                 return formDto;
             }
 
-            _context.Tarefas.Update(tarefa);
-            _context.SaveChanges();
+            _tarefaRepository.Update(tarefa);
 
-            return _mapper.Map<TarefaFormDto>(_context.Tarefas.Find(tarefa.Id));
+            return _mapper.Map<TarefaFormDto>(tarefa);
         }
 
         public ExcluirDto Excluir(long id)
         {
-            var tarefa = _context.Tarefas.Find(id);
+            var tarefa = _tarefaRepository.GetById(id);
 
             if (tarefa == null)
             {
                 return new ExcluirDto()
                 {
                     Id = id,
-                    Erro = "Tarefa não encontrado."
+                    Erro = "Tarefa não encontrada."
                 };
             }
 
-            tarefa.SetExcluido();
+            _tarefaRepository.Excluir(tarefa);
 
-            _context.Attach(tarefa);
-            _context.Entry(tarefa).Property(x => x.Excluido).IsModified = true;
-            _context.Entry(tarefa).Property(x => x.DataDaUltimaAlteracao).IsModified = true;
-            _context.SaveChanges();
-
-            return new ExcluirDto() { Id = id };
+            return new ExcluirDto() { Id = tarefa.Id };
         }
     }
 }

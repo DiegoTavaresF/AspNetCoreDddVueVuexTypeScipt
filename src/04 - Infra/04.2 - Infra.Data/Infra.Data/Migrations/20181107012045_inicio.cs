@@ -20,10 +20,7 @@ namespace Ddd.Infra.Data.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Concluido = table.Column<bool>(nullable: false),
                     DataDaUltimaAlteracao = table.Column<DateTime>(nullable: true),
-                    DataDeCadastro = table.Column<DateTime>(nullable: false),
-                    DataDeConclusao = table.Column<DateTime>(nullable: true),
                     Descricao = table.Column<string>(maxLength: 200, nullable: true),
                     Excluido = table.Column<bool>(nullable: false),
                     Titulo = table.Column<string>(maxLength: 100, nullable: false)

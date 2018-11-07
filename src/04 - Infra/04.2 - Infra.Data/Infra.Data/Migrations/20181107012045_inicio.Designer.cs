@@ -11,7 +11,7 @@ using System;
 namespace Ddd.Infra.Data.Migrations
 {
     [DbContext(typeof(ContextBase))]
-    [Migration("20180907091248_inicio")]
+    [Migration("20181107012045_inicio")]
     partial class inicio
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,15 +26,7 @@ namespace Ddd.Infra.Data.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Concluido");
-
                     b.Property<DateTime?>("DataDaUltimaAlteracao");
-
-                    b.Property<DateTime>("DataDeCadastro");
-
-                    b.Property<DateTime?>("DataDeConclusao");
-
-                    b.Property<DateTime?>("DataDeExclusao");
 
                     b.Property<string>("Descricao")
                         .HasMaxLength(200);

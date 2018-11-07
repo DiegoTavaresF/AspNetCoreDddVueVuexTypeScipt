@@ -2,16 +2,19 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.3" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
+    <PackageReference Include="xunit" Version="2.3.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\04 - Infra\04.1 - CrossCutting\Infra.Data.CrossCutting.Resources\Ddd.Infra.Data.CrossCutting.Resources.csproj" />
+    <ProjectReference Include="..\Ddd_Domain\Ddd.Domain.csproj" />
   </ItemGroup>
 
 </Project>

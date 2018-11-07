@@ -1,22 +1,12 @@
 ﻿using Ddd.Domain.Base;
-using System;
+using Ddd.Infra.Data.CrossCutting.Resources;
 
 namespace Ddd.Domain.Entities.Tarefas
 {
     public class Tarefa : EntityBase
     {
-        public Tarefa(bool concluido, string descricao, string titulo)
+        public Tarefa(string descricao, string titulo)
         {
-            if (DataDeCadastro != DateTime.MinValue && Id > 0)
-            {
-                DataDaUltimaAlteracao = DateTime.Now;
-            }
-            else
-            {
-                DataDeCadastro = DateTime.Now;
-            }
-
-            SetConcluido(concluido);
             SetDescricao(descricao);
             SetTitulo(titulo);
         }
@@ -25,27 +15,8 @@ namespace Ddd.Domain.Entities.Tarefas
         {
         }
 
-        public bool Concluido { get; private set; }
-        public DateTime? DataDeConclusao { get; private set; }
         public string Descricao { get; private set; }
         public string Titulo { get; private set; }
-
-        public void SetConcluido(bool concluido)
-        {
-            if (Concluido != concluido)
-            {
-                if (concluido)
-                {
-                    DataDeConclusao = DateTime.Now;
-                }
-                else
-                {
-                    DataDeConclusao = null;
-                }
-
-                Concluido = concluido;
-            }
-        }
 
         public void SetDescricao(string descricao)
         {
@@ -54,6 +25,12 @@ namespace Ddd.Domain.Entities.Tarefas
 
         public void SetTitulo(string titulo)
         {
+            if (string.IsNullOrWhiteSpace(titulo))
+            {
+                AddError(DomainResources.Tarefa_TituloEObrigatorio);
+                return;
+            }
+
             Titulo = titulo;
         }
     }

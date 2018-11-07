@@ -4,7 +4,7 @@ using Ddd.Domain.Entities.Tarefas;
 
 namespace Ddd.Application.AutoMapper
 {
-    internal class ViewModelToDomainMappingProfile : Profile
+    public class ViewModelToDomainMappingProfile : Profile
     {
         public ViewModelToDomainMappingProfile()
         {
