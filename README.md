@@ -21,6 +21,8 @@ Create and search
 - .NET Core DI
 - AutoMapper
 - FluentValidator
+- Repository
+- Unit of work
 
 ## Architecture:
 - DDD (Domain Driven Design) 
