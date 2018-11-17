@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  vuets:
+    image: $vuets
+    build:
+      context: .
+      dockerfile: ["0 - Presentation/VueTs/Dockerfile"]
+    networks:
+      - vuets-network
+
+networks: 
+    vuets-network:
+        driver: bridge

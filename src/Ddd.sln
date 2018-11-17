@@ -33,7 +33,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ddd_DomainTests", "03 - Dom
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ddd.Infra.Data.CrossCutting.Resources", "04 - Infra\04.1 - CrossCutting\Infra.Data.CrossCutting.Resources\Ddd.Infra.Data.CrossCutting.Resources.csproj", "{F34F1563-9A59-4A98-A64D-C9B704C1A0A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ddd_Application_Tests", "02 - Application\Ddd_Application_Tests\Ddd_Application_Tests.csproj", "{750B364D-2DD8-4519-BB1D-A746A11D87FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ddd_Application_Tests", "02 - Application\Ddd_Application_Tests\Ddd_Application_Tests.csproj", "{750B364D-2DD8-4519-BB1D-A746A11D87FD}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{3D88CA7E-21DA-42B2-BECB-9C830A8BEEAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +79,10 @@ Global
 		{750B364D-2DD8-4519-BB1D-A746A11D87FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{750B364D-2DD8-4519-BB1D-A746A11D87FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{750B364D-2DD8-4519-BB1D-A746A11D87FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D88CA7E-21DA-42B2-BECB-9C830A8BEEAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D88CA7E-21DA-42B2-BECB-9C830A8BEEAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D88CA7E-21DA-42B2-BECB-9C830A8BEEAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D88CA7E-21DA-42B2-BECB-9C830A8BEEAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
