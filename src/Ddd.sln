@@ -35,8 +35,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ddd.Infra.Data.CrossCutting
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ddd_Application_Tests", "02 - Application\Ddd_Application_Tests\Ddd_Application_Tests.csproj", "{750B364D-2DD8-4519-BB1D-A746A11D87FD}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{3D88CA7E-21DA-42B2-BECB-9C830A8BEEAB}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
